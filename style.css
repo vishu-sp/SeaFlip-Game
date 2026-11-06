@@ -1,0 +1,67 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{font-family:"Segoe UI",system-ui,Arial,sans-serif;color:#06375a;overflow-x:hidden;
+  background:radial-gradient(ellipse at 50% -10%,#bff0ff 0,#4fb6ee 40%,#0a5fa5 80%,#073a6b 100%) fixed;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+#sea{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+#sea i{position:absolute;bottom:-60px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff9,#fff2 60%,#fff0);border:1px solid #fff6;animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-115vh) translateX(30px)}}
+#fsBtn{position:fixed;top:calc(10px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));z-index:20;width:44px;height:44px;margin:0;padding:0;border-radius:50%;font-size:22px;background:#ffffffcc;backdrop-filter:blur(6px)}
+#app{position:relative;z-index:1;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:16px}
+.screen{display:none;width:min(100%,480px);max-height:calc(100dvh - 32px);overflow:auto;background:linear-gradient(#fffffff0,#eaf8ffee);backdrop-filter:blur(10px);
+  border:1px solid #fff;border-radius:24px;padding:22px;box-shadow:0 20px 50px #022a5566,inset 0 1px 0 #fff}
+.screen.active{display:block;animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}}
+#game.screen{width:min(100%,640px)}
+h1{font-size:30px;margin:6px 0 0;background:linear-gradient(#1e88e5,#0a4f8a);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2,h3{margin:4px 0 14px;text-align:center}
+.logo{text-align:center;margin-bottom:14px}.logo p{margin:2px 0;font-size:14px;opacity:.8}
+.hero{width:110px;height:110px;margin:0 auto;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 8px 8px #0a4f8a55)}
+@keyframes float{50%{transform:translateY(-10px) rotate(-4deg)}}
+button{display:block;width:100%;padding:13px;margin:9px 0;border:1px solid #9bd3f3;background:linear-gradient(#fff,#d9f0fd);color:#06375a;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 3px 0 #9bd3f3;transition:transform .1s}
+button:active{transform:translateY(2px);box-shadow:0 1px 0 #9bd3f3}
+button.primary{background:linear-gradient(#4db3ff,#1670d8);color:#fff;border:none;box-shadow:0 4px 0 #0f4f9c}
+input{width:100%;padding:13px;margin:6px 0;border:2px solid #b5e0f7;border-radius:12px;font-size:16px;background:#fff;outline:none}
+input:focus{border-color:#1e88e5}
+.tabs{display:flex;gap:8px}.tabs button.active{background:linear-gradient(#4db3ff,#1670d8);color:#fff}
+.msg{min-height:20px;text-align:center;color:#c62828;font-size:14px;margin:6px 0}.msg.info{color:#06375a}
+.level{padding:14px 16px;margin:12px 0;border-radius:16px;cursor:pointer;border:2px solid;box-shadow:0 4px 10px #0002;transition:transform .15s}
+.level:hover{transform:scale(1.02)}
+.level.l1{background:linear-gradient(#f0fff0,#cfeccf);border-color:#5cb85c}.level.l2{background:linear-gradient(#fffbe8,#ffeaa8);border-color:#f0ad4e}.level.l3{background:linear-gradient(#fff0f0,#ffc9c9);border-color:#e57373}
+.level.locked{opacity:.45;cursor:not-allowed;filter:grayscale(.6)}
+.bar{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:14px;margin-bottom:10px}
+.pill{width:max-content;margin:0 auto 12px;padding:5px 16px;background:#fff;border:2px solid #b5e0f7;border-radius:20px;font-weight:700;font-size:14px}
+
+/* ---- 3D flip cards ---- */
+#grid{display:grid;gap:clamp(6px,1.6vw,12px);width:min(100%,calc(100dvh - 230px));margin:0 auto}
+.card{perspective:700px;background:none;border:none;box-shadow:none;padding:0;margin:0;aspect-ratio:1;border-radius:14px}
+.card:active{transform:scale(.96)}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d}
+.card.up .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 12px #0a3d7a55}
+.front{background:radial-gradient(circle at 30% 25%,#8fdcff,#2b8fe6 60%,#165fb8);border:2px solid #d6f1ff;color:#fff;font-size:clamp(20px,6vw,40px);font-weight:800;text-shadow:0 2px 4px #0a3d7a}
+.front::after{content:"";position:absolute;inset:6px;border-radius:10px;border:2px dashed #ffffff66}
+.back{transform:rotateY(180deg);background:radial-gradient(circle at 50% 30%,#fff,#dff3ff);border:2px solid #7cc6f2;padding:10%}
+.back svg{width:100%;height:100%;filter:drop-shadow(0 3px 3px #0004)}
+.card.done .back{background:radial-gradient(circle at 50% 30%,#fff,#d4f7d9);border-color:#4cc26a;animation:glow .8s}
+@keyframes glow{50%{box-shadow:0 0 24px 6px #6df08f}}
+.card.bonus .back{background:radial-gradient(circle,#e8f7ff,#bfe6fb);border-style:dashed}
+
+#fishImg{display:block;width:100%;max-height:42dvh;object-fit:contain;margin:10px auto;border-radius:14px;background:#eaf6ff;border:2px solid #b5e0f7;min-height:120px}
+table{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:14px}
+td,th{padding:9px 8px;border-bottom:1px solid #cfe9f8;text-align:left}
+ol{padding-left:22px;line-height:1.7}
+.win{color:#2e7d32;font-weight:700}.lost{color:#c62828;font-weight:700}
+#modal{position:fixed;inset:0;z-index:50;background:#021d3a99;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px}
+#modal[hidden]{display:none}
+.box{background:linear-gradient(#fff,#e6f6ff);border-radius:24px;padding:26px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px #0008;animation:pop .3s ease}
+.box .big{font-size:60px}
+@media (max-width:480px){#app{padding:10px}.screen{padding:16px;border-radius:20px}.hero{width:84px;height:84px}}
+@media (max-height:520px){.hero{display:none}#grid{width:min(100%,calc(100dvh - 140px))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+#timeTrack{height:14px;background:#cfe9f8;border-radius:9px;overflow:hidden;margin-bottom:10px;border:2px solid #fff;box-shadow:inset 0 2px 4px #0003}
+#timeBar{height:100%;width:100%;background:linear-gradient(90deg,#37c978,#8be04e);border-radius:9px;transition:width 1s linear}
+#timeBar.low{background:linear-gradient(90deg,#ff5252,#ff9d3d);animation:blink .5s infinite alternate}
+@keyframes blink{to{opacity:.55}}
+#hudTimer{font-size:18px}

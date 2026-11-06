@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0a4f8a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>SeaFlip Quest</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <linearGradient id="gO" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff7a1a"/></linearGradient>
+ <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd4ff"/><stop offset="1" stop-color="#1f7be0"/></linearGradient>
+ <linearGradient id="gR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9a8a"/><stop offset="1" stop-color="#e02f2f"/></linearGradient>
+ <linearGradient id="gP" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0a8ff"/><stop offset="1" stop-color="#9a45d0"/></linearGradient>
+ <linearGradient id="gY" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2a0"/><stop offset="1" stop-color="#f2b705"/></linearGradient>
+ <linearGradient id="gG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ff2a8"/><stop offset="1" stop-color="#2fa84f"/></linearGradient>
+ <linearGradient id="gK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd0e0"/><stop offset="1" stop-color="#ff6f9c"/></linearGradient>
+ <linearGradient id="gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8c8d6"/><stop offset="1" stop-color="#5d7285"/></linearGradient>
+</defs></svg>
+<div id="sea"></div>
+<button id="fsBtn" title="Full screen" aria-label="Full screen">⛶</button>
+<main id="app">
+
+  <!-- 1. LOGIN / REGISTER -->
+  <section class="screen" id="login">
+    <div class="logo"><div class="hero"></div><h1>SeaFlip Quest</h1><p>Match the Sea!</p></div>
+    <div class="tabs"><button id="tabLogin" class="active">Login</button><button id="tabRegister">Register</button></div>
+    <input id="username" placeholder="Username" autocomplete="username">
+    <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+    <button class="primary" id="authBtn">Login</button>
+    <p class="msg" id="authMsg"></p>
+  </section>
+
+  <!-- 2. MAIN MENU -->
+  <section class="screen" id="menu">
+    <div class="logo"><div class="hero"></div><h1>SeaFlip Quest</h1><p id="welcome"></p></div>
+    <button class="primary" data-go="levels">▶ Start Game</button>
+    <button data-go="profile">👤 Profile</button>
+    <button data-go="leaderboard">🏆 Leaderboard</button>
+    <button data-go="instructions">📖 Instructions</button>
+    <button id="logoutBtn">🚪 Logout</button>
+  </section>
+
+  <!-- 3. LEVEL SELECT -->
+  <section class="screen" id="levels">
+    <h2>Choose Your Level</h2>
+    <div id="levelList"></div>
+    <button data-go="menu">← Back</button>
+  </section>
+
+  <!-- 4 & 7. GAME (cards + fish puzzle) -->
+  <section class="screen" id="game">
+    <div class="bar"><span id="hudLevel"></span><span id="hudTimer"></span><span id="hudScore"></span></div>
+    <div id="cardPhase">
+      <div class="pill" id="hudMatches"></div>
+      <div id="grid"></div>
+    </div>
+    <div id="apiPhase" hidden>
+      <div id="timeTrack"><div id="timeBar"></div></div>
+      <h3>How many fish are in the picture?</h3>
+      <p class="msg" id="apiMsg">Loading puzzle…</p>
+      <img id="fishImg" alt="Fish puzzle">
+      <input id="answer" type="number" min="0" placeholder="Your answer">
+      <button class="primary" id="submitAnswer">Submit</button>
+    </div>
+  </section>
+
+  <!-- 11. PROFILE -->
+  <section class="screen" id="profile">
+    <h2>👤 Player Profile</h2>
+    <table id="profileTable"></table>
+    <button data-go="history">🕘 Game History</button>
+    <button data-go="menu">Back</button>
+  </section>
+
+  <!-- 12. LEADERBOARD -->
+  <section class="screen" id="leaderboard">
+    <h2>🏆 Leaderboard</h2>
+    <table id="lbTable"></table>
+    <button data-go="menu">Back</button>
+  </section>
+
+  <!-- 13. INSTRUCTIONS -->
+  <section class="screen" id="instructions">
+    <h2>📖 How to Play</h2>
+    <ol>
+      <li>Flip the cards and match the same seafood pairs.</li>
+      <li>Earn 10 points for a correct match.</li>
+      <li>Lose 2 points for a wrong match.</li>
+      <li>Complete the card puzzle to unlock the Fish API challenge.</li>
+      <li>Count the fish in the picture before the timer runs out to reach the next level.</li>
+    </ol>
+    <button data-go="menu">Back</button>
+  </section>
+
+  <!-- 14. GAME HISTORY -->
+  <section class="screen" id="history">
+    <h2>🕘 Game History</h2>
+    <table id="histTable"></table>
+    <button data-go="profile">Back</button>
+  </section>
+</main>
+
+<!-- Pop-up used for results, win, game over, logout confirm -->
+<div id="modal" hidden><div class="box" id="modalBox"></div></div>
+
+<!-- Each file has ONE job (high cohesion) and they talk through small functions (low coupling) -->
+<script src="js/art.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
