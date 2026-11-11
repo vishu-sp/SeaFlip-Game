@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#061f2a">
+    <title>SeafoodFlip Challenge</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <linearGradient id="gO" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffd27a"></stop>
+          <stop offset="1" stop-color="#ff7a1a"></stop>
+        </linearGradient>
+        <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7fd4ff"></stop>
+          <stop offset="1" stop-color="#1f7be0"></stop>
+        </linearGradient>
+        <linearGradient id="gR" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ff9a8a"></stop>
+          <stop offset="1" stop-color="#e02f2f"></stop>
+        </linearGradient>
+        <linearGradient id="gP" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e0a8ff"></stop>
+          <stop offset="1" stop-color="#9a45d0"></stop>
+        </linearGradient>
+        <linearGradient id="gY" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff2a0"></stop>
+          <stop offset="1" stop-color="#f2b705"></stop>
+        </linearGradient>
+        <linearGradient id="gG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#9ff2a8"></stop>
+          <stop offset="1" stop-color="#2fa84f"></stop>
+        </linearGradient>
+        <linearGradient id="gK" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffd0e0"></stop>
+          <stop offset="1" stop-color="#ff6f9c"></stop>
+        </linearGradient>
+        <linearGradient id="gS" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b8c8d6"></stop>
+          <stop offset="1" stop-color="#5d7285"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <div id="sea" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="/">◈ SeafoodFlip <span>CHALLENGE</span></a>
+      <span class="edition">A LITTLE MEMORY. A DEEP ADVENTURE.</span>
+    </header>
+
+    <main id="app">
+      <aside class="ocean-story">
+        <div class="eyebrow">EXPLORE • MATCH • DISCOVER</div>
+        <h1>
+          A whole ocean<br>
+          of <em>possibilities.</em>
+        </h1>
+        <p>
+          Follow your curiosity beneath the surface.<br>
+          Find the pairs. Solve the puzzle. Rule the reef.
+        </p>
+
+        <div class="aquarium" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="art-fish" data-art="fish"></div>
+          <div class="art-turtle" data-art="turtle"></div>
+          <div class="art-shell" data-art="shell"></div>
+          <span class="float-label">✦ +10 &nbsp; Perfect pair</span>
+        </div>
+
+        <div class="story-bottom">
+          <span>03 <small>REEFS TO EXPLORE</small></span>
+          <span>24 <small>PAIRS TO DISCOVER</small></span>
+          <span>∞ <small>REASONS TO PLAY</small></span>
+        </div>
+      </aside>
+
+      <div class="play-panel">
+        <div id="notice" role="status" aria-live="polite"></div>
+
+        <section class="screen" id="login">
+          <span class="eyebrow">YOUR ADVENTURE STARTS HERE</span>
+          <h2 tabindex="-1">
+            SeafoodFlip<br>
+            <em>Challenge</em>
+          </h2>
+          <p class="muted">A fresh dive into memory and mystery.</p>
+
+          <div class="tabs">
+            <button id="tabLogin" class="active">Sign in</button>
+            <button id="tabRegister">Create account</button>
+          </div>
+
+          <form id="authForm">
+            <div id="nameField" hidden>
+              <label for="displayName">Player name</label>
+              <input id="displayName" maxlength="30" autocomplete="nickname" placeholder="Your ocean alias">
+            </div>
+
+            <label for="email">Email address</label>
+            <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+
+            <label for="password">Password</label>
+            <input id="password" type="password" minlength="8" required autocomplete="current-password" placeholder="At least 8 characters">
+
+            <button class="primary" id="authBtn">Dive in →</button>
+          </form>
+
+          <button class="text-button" id="resetBtn">Forgot your password?</button>
+          <div class="panel-foot">◈ Your progress, ready for your next dive.</div>
+        </section>
+
+        <section class="screen" id="menu">
+          <span class="eyebrow">WELCOME ABOARD</span>
+          <h2 tabindex="-1">
+            Your next<br>
+            <em>great dive.</em>
+          </h2>
+          <p id="welcome" class="muted"></p>
+
+          <div class="mini-reef" data-art="tropical"></div>
+          <button class="primary" data-start>Start adventure →</button>
+
+          <div class="menu-grid">
+            <button data-go="profile">◉ My profile</button>
+            <button data-go="leaderboard">♛ Leaderboard</button>
+            <button data-go="instructions">◇ How to play</button>
+            <button data-go="history">◷ Dive history</button>
+          </div>
+
+          <button class="text-button" id="logoutBtn">Sign out</button>
+        </section>
+
+        <section class="screen" id="game">
+          <div class="bar">
+            <span id="hudLevel"></span>
+            <span id="hudTimer"></span>
+            <span id="hudScore"></span>
+          </div>
+
+          <h2 id="gameTitle" tabindex="-1">Coral Cove</h2>
+
+          <div id="cardPhase">
+            <p id="hudMatches" class="muted"></p>
+            <div id="grid"></div>
+            <p class="game-tip">
+              Find a pair: +10 · Miss a pair: −2<br>
+              The centre wave is a free space.
+            </p>
+          </div>
+
+          <div id="readyPhase" hidden>
+            <div class="mini-reef" data-art="puffer"></div>
+            <h3>Pairs complete. Puzzle awaits.</h3>
+            <p class="muted">Solve the Fish API image to unlock the next reef. Your timer starts once the image is ready.</p>
+            <button id="puzzleBtn" class="primary">Load Fish puzzle →</button>
+          </div>
+
+          <div id="apiPhase" hidden>
+            <div id="timeTrack">
+              <div id="timeBar"></div>
+            </div>
+
+            <h3>What number does the fish represent?</h3>
+            <img id="fishImg" alt="Fish API number puzzle">
+
+            <form id="answerForm">
+              <label for="answer">Your answer</label>
+              <input id="answer" type="number" min="0" max="999" step="1" required inputmode="numeric">
+              <button class="primary">Check answer →</button>
+            </form>
+          </div>
+
+          <div id="resultPhase" hidden>
+            <div class="mini-reef" data-art="starfish"></div>
+            <h3 id="resultTitle"></h3>
+            <p id="resultCopy" class="muted"></p>
+            <button class="primary" data-start>Dive again →</button>
+          </div>
+
+          <button id="leaveBtn" class="text-button">End dive & return to menu</button>
+        </section>
+
+        <section class="screen" id="profile">
+          <span class="eyebrow">YOUR VIRTUAL IDENTITY</span>
+          <h2 tabindex="-1">Diver profile</h2>
+          <table id="profileTable"></table>
+          <button data-go="history">View dive history</button>
+          <button data-go="menu">← Back to harbour</button>
+        </section>
+
+        <section class="screen" id="leaderboard">
+          <span class="eyebrow">THE OCEAN'S FINEST</span>
+          <h2 tabindex="-1">Top divers</h2>
+          <table id="lbTable"></table>
+          <p id="lbEmpty">Finish your first dive to appear here.</p>
+          <button data-go="menu">← Back to harbour</button>
+        </section>
+
+        <section class="screen" id="history">
+          <span class="eyebrow">EVERY DIVE COUNTS</span>
+          <h2 tabindex="-1">Your journey</h2>
+          <table id="histTable"></table>
+          <p id="histEmpty">No completed dives yet. Your adventure awaits.</p>
+          <button data-go="menu">← Back to harbour</button>
+        </section>
+
+        <section class="screen" id="instructions">
+          <span class="eyebrow">A QUICK FIELD GUIDE</span>
+          <h2 tabindex="-1">How to play</h2>
+
+          <ol>
+            <li>Reveal two cards. Match all seafood pairs.</li>
+            <li>A match earns 10 points; a mismatch costs 2.</li>
+            <li>The centre wave in odd grids is free.</li>
+            <li>Solve the Fish API puzzle before time runs out.</li>
+            <li>Complete all three reefs to win. A new dive resets your score.</li>
+          </ol>
+
+          <div class="reef-row">01 · Coral Cove <b>3 × 3 · 60s</b></div>
+          <div class="reef-row">02 · Pearl Lagoon <b>4 × 4 · 45s</b></div>
+          <div class="reef-row">03 · Midnight Reef <b>5 × 5 · 30s</b></div>
+
+          <p class="muted">Scores may go below zero. Leaving a dive records a loss. Only finished dives appear in history.</p>
+          <button data-go="menu">← Back to harbour</button>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      SEAFOODFLIP CHALLENGE <span>Memory meets the sea.</span>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
