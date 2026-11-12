@@ -3,9 +3,9 @@
 import { randomInt } from 'node:crypto';
 
 export const LEVELS = [
-  { size: 3, time: 60, name: 'Coral Cove' },
-  { size: 4, time: 45, name: 'Pearl Lagoon' },
-  { size: 5, time: 30, name: 'Midnight Reef' },
+  { size: 3, time: 15, name: 'Coral Cove' },
+  { size: 4, time: 10, name: 'Pearl Lagoon' },
+  { size: 5, time: 5, name: 'Midnight Reef' },
 ];
 
 export const SYMBOLS = [

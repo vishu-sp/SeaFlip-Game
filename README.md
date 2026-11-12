@@ -49,6 +49,8 @@ Open **http://localhost:3000**. Do not double-click `index.html` or use VS Code 
 
 Choose **Create account**, enter your player name, email and an 8-character-or-longer password, then start an adventure. Existing browser-only accounts from the old ZIP are not migrated; register a new Firebase account. The Firebase session lasts for the current browser session. Password reset is available on the sign-in screen.
 
+Use the **Music off** button in the header to play or pause the game's original, browser-generated ambient music. Click the button to start playback.
+
 To stop the server, press Ctrl+C. Restart it after editing `.env`.
 
 ## 5. Verify Firebase is connected
@@ -64,13 +66,13 @@ To stop the server, press Ctrl+C. Restart it after editing `.env`.
 
 | Level | Reef | Grid | Pairs | Fish puzzle time |
 |---|---|---|---|---|
-| 1 | Coral Cove | 3 × 3 | 4 | 60 seconds |
-| 2 | Pearl Lagoon | 4 × 4 | 8 | 45 seconds |
-| 3 | Midnight Reef | 5 × 5 | 12 | 30 seconds |
+| 1 | Coral Cove | 3 × 3 | 4 | 15 seconds |
+| 2 | Pearl Lagoon | 4 × 4 | 8 | 10 seconds |
+| 3 | Midnight Reef | 5 × 5 | 12 | 5 seconds |
 
 A correct pair gives +10; a mismatch gives −2. Scores may be negative. Every new adventure begins at Level 1 with zero points. Finish all three levels to win. A timeout or explicit exit records a loss. The free centre wave makes the odd grids possible and gives no points.
 
-Your proposal's table says 20 seconds for Hard, while its game flow and uploaded code say 30. This version preserves 30. To change it, edit the third `time` value in `backend/src/engine.js` and update the instructions text in `frontend/index.html`.
+Your proposal's table says 20 seconds for Hard. This version uses 5 seconds for the final reef, with 15 seconds and 10 seconds for the first two reefs. To change a level's time, edit its `time` value in `backend/src/engine.js` and update the instructions text in `frontend/index.html`.
 
 The live API returns `question`, `fish` and `chest`. We use `fish` as the answer, following Marc Conrad's example. No locally generated fallback puzzle is counted as a real API result. Service failures show a Retry action and preserve the run. The timer starts after image decoding and the server's `/begin` response. Repeated `/begin` requests do not reset it.
 

@@ -61,9 +61,52 @@ body::before {
   animation: rise linear infinite;
 }
 
+.swimming-fish {
+  position: absolute;
+  left: 0;
+  opacity: 0.2;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+}
+
+.swimming-fish svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.swim-right {
+  animation-name: swim-right;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.swim-left {
+  animation-name: swim-left;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 @keyframes rise {
   to {
     transform: translateY(-115vh) translateX(30px);
+  }
+}
+
+@keyframes swim-right {
+  from {
+    transform: translateX(-100px) scaleX(-1);
+  }
+  to {
+    transform: translateX(calc(100vw + 100px)) scaleX(-1);
+  }
+}
+
+@keyframes swim-left {
+  from {
+    transform: translateX(calc(100vw + 100px));
+  }
+  to {
+    transform: translateX(-100px);
   }
 }
 
@@ -95,9 +138,27 @@ body::before {
 }
 
 .edition {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--muted);
+  color: var(--mint-strong);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 12px rgba(185, 246, 123, 0.3);
+}
+
+.music-toggle {
+  width: auto;
+  margin: 0;
+  padding: 10px 14px;
+  border-color: rgba(185, 246, 123, 0.4);
+  background: rgba(19, 70, 75, 0.8);
+  color: var(--mint-strong);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.music-toggle[aria-pressed="true"] {
+  background: var(--mint);
+  color: #16362e;
 }
 
 #app {
@@ -163,11 +224,19 @@ h3 {
   text-align: center;
 }
 
-.muted,
-.ocean-story > p {
+.muted {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.7;
+}
+
+.ocean-story > p {
+  color: #e2fff4;
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.8;
+  text-shadow: 0 1px 10px rgba(185, 246, 123, 0.18);
 }
 
 .aquarium {
@@ -474,6 +543,7 @@ a:focus-visible {
 }
 
 .inner {
+  display: block;
   position: relative;
   width: 100%;
   height: 100%;

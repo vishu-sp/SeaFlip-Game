@@ -1,5 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {newRun,flip,answer,publicRun,board,expire} from '../src/engine.js';import {parsePuzzle} from '../src/fish.js';
+import {newRun,flip,answer,publicRun,board,expire,LEVELS} from '../src/engine.js';import {parsePuzzle} from '../src/fish.js';
+test('each reef uses its configured answer countdown',()=>{assert.deepEqual(LEVELS.map(level=>level.time),[15,10,5]);});
 test('every grid contains pairs and exactly one free space on odd grids',()=>{for(let n=1;n<=3;n++){const r=board(n),counts={};for(const s of r.deck)counts[s]=(counts[s]||0)+1;assert.equal(r.deck.length,[9,16,25][n-1]);for(const [s,c] of Object.entries(counts))assert.equal(c,s==='wave'?1:2);}});
 test('hidden cards and solution are never sent to browser',()=>{const r=newRun('u','r');r.solution=5;const p=publicRun(r);assert.equal(p.solution,undefined);assert.ok(p.cards.filter(c=>c.symbol).every(c=>c.symbol==='wave'));});
 test('same card cannot score; correct pair scores exactly once',()=>{const r=newRun('u','r');const a=r.deck.findIndex(s=>s!=='wave'),b=r.deck.findIndex((s,i)=>i!==a&&s===r.deck[a]);flip(r,a);assert.throws(()=>flip(r,a));flip(r,b);assert.equal(r.score,10);assert.throws(()=>flip(r,b));});
