@@ -96,6 +96,20 @@ The live API returns `question`, `fish` and `chest`. We use `fish` as the answer
 | `docs/TESTING.md` | Checks performed and your integration checklist |
 | `docs/ATTRIBUTION.md` | Acknowledgements and source references |
 
+### A simple way to read the code
+
+You do not need to understand every file at once. Follow one action through the project:
+
+1. `frontend/index.html` contains the buttons and forms you see.
+2. `frontend/js/main.js` listens for clicks and form submissions.
+3. `frontend/js/game.js` updates the game screen and asks the server to do game actions.
+4. `frontend/js/api.js` sends those requests; `frontend/js/auth.js` provides the sign-in token.
+5. `backend/src/server.js` receives each request and connects the other backend files.
+6. `backend/src/engine.js` contains the game rules. `backend/src/repository.js` saves game data.
+7. `backend/test/engine.test.js` checks that the game rules work.
+
+When you want to make a change, start with the file responsible for that feature, then run `npm test`. For example, a scoring change belongs in `backend/src/engine.js`; a button label belongs in `frontend/index.html`. The project has multiple files because each one has a small job, not because you need to learn them all before you can make a change.
+
 These are SVG illustrations with layered lighting/shadows and CSS 3D transforms, not downloadable 3D mesh models. Your existing artwork is retained. The Figma link could not be accessed, so exact wireframe fidelity has not been verified.
 
 ## 8. Troubleshooting

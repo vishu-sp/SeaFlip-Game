@@ -1,8 +1,11 @@
 rules_version = '2';
+
 service cloud.firestore {
- match /databases/{database}/documents {
-  // Browser clients never access Firestore directly. Authenticated Node API uses
-  // Admin SDK and enforces UID ownership. Admin SDK bypasses these rules.
-  match /{document=**} { allow read, write: if false; }
- }
+  match /databases/{database}/documents {
+    // The browser uses our Node API instead of accessing Firestore directly.
+    // The Admin SDK uses separate server-side ownership checks.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
 }
